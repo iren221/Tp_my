@@ -1,7 +1,10 @@
 package com.example.tp_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,8 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 public class AnimalDetails extends AppCompatActivity {
     ImageView image;
     TextView name, age, weight;
-    Button eat, kupanie, apteka, walk, grumer, puzirek;
+    Button eat, kupanie, apteka, walk, grumer, puzirek, btn_notification;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class AnimalDetails extends AppCompatActivity {
         grumer = findViewById(R.id.grumer);
         puzirek = findViewById(R.id.puzirek);
 
+        btn_notification = findViewById(R.id.btn_notification);
+
         image = findViewById(R.id.details_image);
         age = findViewById(R.id.details_age);
         name = findViewById(R.id.details_name);
@@ -46,6 +52,18 @@ public class AnimalDetails extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("animals").child(uid).child(key);
+
+
+        btn_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent recommend = new Intent(AnimalDetails.this, NotificationActivity.class);
+                startActivity(recommend);
+                //NotificationManagerCompat.from(getApplicationContext()).areNotificationsEnabled();
+            }
+        });
+
+
         //1 кнопка
         eat.setOnClickListener(new View.OnClickListener() {
             @Override

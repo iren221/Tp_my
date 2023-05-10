@@ -27,8 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String id_channel = "pet_channel";
-    public String name_channel = "pet_channel_name";
+
 
     private FirebaseAuth mAuth;
     Button btn_regist;
@@ -53,14 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btn_regist = findViewById(R.id.button2);
         btn_login = findViewById(R.id.button1);
 
-        NotificationChannel channel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            channel = new NotificationChannel(id_channel,
-                    name_channel,
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+
 
 
         btn_regist.setOnClickListener(new View.OnClickListener() {
